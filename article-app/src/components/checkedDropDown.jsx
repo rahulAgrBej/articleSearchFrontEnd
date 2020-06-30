@@ -7,7 +7,7 @@ class CheckedDropDown extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            countryList: [],
+            optionsList: [],
             showDropDownStatus: false,
             showDropDown: "dropDownContentHide"
         }
@@ -36,9 +36,9 @@ class CheckedDropDown extends React.Component {
         fetch(this.props.url).then((response) => {
             return response.json();
         }).then((data) => {
-            let countriesIn = data.countryList;
+            let optionsIn = data.results;
             this.setState({
-                countryList: countriesIn
+                optionsList: optionsIn
             });
         })
     }
@@ -46,12 +46,12 @@ class CheckedDropDown extends React.Component {
     render() {
         return (
             <div id="dropDownMenu">
-                    <button id="countryButton" onClick={this.dropContentShow}>Countries</button>
+                    <button id="dropDownButton" onClick={this.dropContentShow}>{this.props.name}</button>
                     <br />
                     <div className={this.state.showDropDown}>
                         {
-                            this.state.countryList.map(
-                                country => <CheckBoxOption key={country.code} countryObj={country} />
+                            this.state.optionsList.map(
+                                optionRef => <CheckBoxOption key={optionRef.id} optionObj={optionRef} />
                                 )
                         }
                     </div>

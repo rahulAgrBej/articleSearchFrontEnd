@@ -11,7 +11,7 @@ class CheckBoxOption extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <input type="checkbox" /> {this.props.countryObj.name}<br />
+                <input type="checkbox" /> {this.props.optionObj.name}<br />
             </React.Fragment>
         )
     }

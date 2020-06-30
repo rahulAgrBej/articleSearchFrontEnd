@@ -21,7 +21,8 @@ class Dashboard extends React.Component {
                     <tr>
                         <td>
                         <CheckedDropDown
-                                url="https://article-search-api.herokuapp.com/api/countryList" />
+                                url="https://article-search-api.herokuapp.com/api/countryList"
+                                name="Countries"/>
                         </td>
                         <td>
                         <TextBarDate />
@@ -37,7 +38,8 @@ class Dashboard extends React.Component {
                         </td>
                         <td>
                         <CheckedDropDown
-                                url="https://article-search-api.herokuapp.com/api/countryList" />
+                                url="https://article-search-api.herokuapp.com/api/outputList"
+                                name="Output Types"/>
                         </td>
                     </tr>
                     </tbody>    
