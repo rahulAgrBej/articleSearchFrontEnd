@@ -1,4 +1,5 @@
 import React from 'react';
+import CheckBoxOption from './checkBoxOption'
 
 class CheckedDropDown extends React.Component {
 
@@ -25,7 +26,7 @@ class CheckedDropDown extends React.Component {
     render() {
         return (
             <React.Fragment>
-                {this.state.countryList.map(country => <p key={country.code}>{country.name}</p>)}
+                {this.state.countryList.map(country => <CheckBoxOption key={country.code} countryObj={country} />)}
             </React.Fragment>
         );
     }
