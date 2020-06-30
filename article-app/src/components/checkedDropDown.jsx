@@ -45,8 +45,8 @@ class CheckedDropDown extends React.Component {
 
     render() {
         return (
-            <React.Fragment>
-                    <button className="btn btn-primary" onClick={this.dropContentShow}>Countries</button> {this.state.showDropDown}
+            <div id="dropDownMenu">
+                    <button id="countryButton" onClick={this.dropContentShow}>Countries</button>
                     <br />
                     <div className={this.state.showDropDown}>
                         {
@@ -56,7 +56,7 @@ class CheckedDropDown extends React.Component {
                         }
                     </div>
                         
-            </React.Fragment>
+            </div>
         );
     }
 

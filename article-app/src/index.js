@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import CheckedDropDown from './components/checkedDropDown'
+import Dashboard from './components/dashboard'
 import "bootstrap/dist/css/bootstrap.css"
 
 ReactDOM.render(
   <React.StrictMode>
-    <CheckedDropDown url="https://article-search-api.herokuapp.com/api/countryList"/>
+    <Dashboard />
   </React.StrictMode>,
   document.getElementById('root')
 );
