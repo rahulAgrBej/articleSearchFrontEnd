@@ -3,10 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import CheckedDropDown from './components/checkedDropDown'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <CheckedDropDown url="https://article-search-api.herokuapp.com/api/countryList"/>
   </React.StrictMode>,
   document.getElementById('root')
 );
