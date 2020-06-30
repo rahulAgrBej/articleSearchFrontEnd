@@ -1,0 +1,13 @@
+.dropDownContentShow {
+    visibility: visible;
+    max-width: 150px;
+    border-radius: 10px;
+    border-color: lightskyblue;
+    border-style: solid;
+    border-width: thin;
+}
+
+.dropDownContentHide {
+    visibility: hidden;
+    background-color: lightgrey;
+}

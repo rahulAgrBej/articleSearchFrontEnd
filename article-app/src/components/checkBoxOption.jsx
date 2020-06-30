@@ -10,10 +10,9 @@ class CheckBoxOption extends React.Component {
 
     render() {
         return (
-            <div>
-                <h1 className="test">{this.props.countryObj.name}</h1>
-                <button className="btn btn-primary"></button>
-            </div>
+            <React.Fragment>
+                <input type="checkbox" /> {this.props.countryObj.name}<br />
+            </React.Fragment>
         )
     }
 }

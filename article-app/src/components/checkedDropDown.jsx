@@ -1,12 +1,32 @@
 import React from 'react';
 import CheckBoxOption from './checkBoxOption'
+import './css/checkedDropDown.css'
 
 class CheckedDropDown extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            countryList: []
+            countryList: [],
+            showDropDownStatus: false,
+            showDropDown: "dropDownContentHide"
+        }
+        this.dropContentShow = this.dropContentShow.bind(this);
+    }
+
+    dropContentShow() {
+
+        if (this.state.showDropDownStatus === false) {
+            this.setState({
+                showDropDownStatus: true,
+                showDropDown: "dropDownContentShow"
+            });
+        }
+        else {
+            this.setState({
+                showDropDownStatus: false,
+                showDropDown: "dropDownContentHide"
+            });
         }
     }
 
@@ -26,7 +46,16 @@ class CheckedDropDown extends React.Component {
     render() {
         return (
             <React.Fragment>
-                {this.state.countryList.map(country => <CheckBoxOption key={country.code} countryObj={country} />)}
+                    <button className="btn btn-primary" onClick={this.dropContentShow}>Countries</button> {this.state.showDropDown}
+                    <br />
+                    <div className={this.state.showDropDown}>
+                        {
+                            this.state.countryList.map(
+                                country => <CheckBoxOption key={country.code} countryObj={country} />
+                                )
+                        }
+                    </div>
+                        
             </React.Fragment>
         );
     }
