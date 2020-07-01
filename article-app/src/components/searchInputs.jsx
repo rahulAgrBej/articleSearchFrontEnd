@@ -1,5 +1,6 @@
 import React from 'react'
 import CheckedDropDown from './checkedDropDown'
+import './css/searchInputs.css'
 
 class SearchInputs extends React.Component {
 
