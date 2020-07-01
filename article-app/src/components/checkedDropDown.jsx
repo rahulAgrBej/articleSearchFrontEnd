@@ -7,7 +7,6 @@ class CheckedDropDown extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            optionsList: [],
             showDropDownStatus: false,
             showDropDown: "dropDownContentHide"
         }
@@ -30,19 +29,6 @@ class CheckedDropDown extends React.Component {
         }
     }
 
-    componentDidMount() {
-
-        //let fullURL = this.state.proxyURL + this.props.url;
-        fetch(this.props.url).then((response) => {
-            return response.json();
-        }).then((data) => {
-            let optionsIn = data.results;
-            this.setState({
-                optionsList: optionsIn
-            });
-        })
-    }
-
     render() {
         return (
             <div id="dropDownMenu">
@@ -50,8 +36,12 @@ class CheckedDropDown extends React.Component {
                     <br />
                     <div className={this.state.showDropDown}>
                         {
-                            this.state.optionsList.map(
-                                optionRef => <CheckBoxOption key={optionRef.id} optionObj={optionRef} />
+                            this.props.optionsList.map(
+                                optionRef => <CheckBoxOption
+                                    key={optionRef.id}
+                                    optionObj={optionRef}
+                                    onSelect={this.props.onSelect}
+                                    />
                                 )
                         }
                     </div>

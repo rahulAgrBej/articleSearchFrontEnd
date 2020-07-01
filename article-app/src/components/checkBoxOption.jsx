@@ -11,7 +11,10 @@ class CheckBoxOption extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <input type="checkbox" /> {this.props.optionObj.name}<br />
+                <input type="checkbox"
+                        onChange={() => this.props.onSelect(
+                            this.props.optionObj
+                            )}/> {this.props.optionObj.name}<br />
             </React.Fragment>
         )
     }

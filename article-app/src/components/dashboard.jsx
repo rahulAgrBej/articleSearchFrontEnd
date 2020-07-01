@@ -9,8 +9,36 @@ class Dashboard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            countriesListURL: "https://article-search-api.herokuapp.com/api/countryList",
+            outputListURL: "https://article-search-api.herokuapp.com/api/outputList",
+            countriesList: [],
+            outputList: []
         }
+    }
+
+    handleSelectCountry = (country) => {
+        console.log("country handler", country)
+    }
+
+    handleSelectOutput = (optionClicked) => {
+        console.log("options handler", optionClicked)
+    }
+
+    componentDidMount() {
+
+        Promise.all([
+            fetch(this.state.countriesListURL),
+            fetch(this.state.outputListURL)
+        ])
+        .then(
+            ([resp1, resp2]) => Promise.all([resp1.json(), resp2.json()])
+        )
+        .then(
+            ([data1, data2]) => this.setState({
+                countriesList: data1.results,
+                outputList: data2.results
+            })
+        );
     }
 
     render() {
@@ -33,8 +61,10 @@ class Dashboard extends React.Component {
                     <tr>
                         <td>
                         <CheckedDropDown
-                                url="https://article-search-api.herokuapp.com/api/countryList"
-                                name="Countries"/>
+                                name="Countries"
+                                optionsList={this.state.countriesList}
+                                onSelect={this.handleSelectCountry}
+                                />
                         </td>
                         <td>
                         <input className="dateText" type="text"></input>
@@ -62,8 +92,10 @@ class Dashboard extends React.Component {
                         </td>
                         <td>
                         <CheckedDropDown
-                                url="https://article-search-api.herokuapp.com/api/outputList"
-                                name="Output Types"/>
+                                name="Output Types"
+                                optionsList={this.state.outputList}
+                                onSelect={this.handleSelectOutput}
+                                />
                         </td>
                     </tr>
                     <tr>
