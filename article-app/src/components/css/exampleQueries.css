@@ -1,0 +1,10 @@
+.exampleCell {
+    width: 900px;
+    text-align: left;
+    border-style: solid;
+    padding: 10px;
+}
+
+#titleExampleCell {
+    height: 50px;
+}

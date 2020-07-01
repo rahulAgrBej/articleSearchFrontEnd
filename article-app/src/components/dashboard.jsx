@@ -1,6 +1,6 @@
 import React from 'react'
 import CheckedDropDown from './checkedDropDown'
-import TextBarDate from './textBarDate'
+import  ExampleQueries from './exampleQueries'
 import './css/textBarDate.css'
 import './css/dashboard.css'
 
@@ -16,9 +16,15 @@ class Dashboard extends React.Component {
     render() {
         return (
             <div>
+                <div id="dashboardWrapper">
                 <table>
                     <thead></thead>
                     <tbody>
+                    <tr>
+                        <td className="titleCell" colSpan="6">
+                            <h1>articleSearch</h1>
+                        </td>
+                    </tr>
                     <tr>
                         <td className="searchBarCell" colSpan="6">
                             <input className="searchBar" type="text"></input>
@@ -65,8 +71,13 @@ class Dashboard extends React.Component {
                             <button id="searchButton">Search</button>
                         </td>
                     </tr>
+                    
                     </tbody>    
                 </table>
+                <br />
+                <ExampleQueries></ExampleQueries>
+                </div>
+                
             </div>
         );
     }

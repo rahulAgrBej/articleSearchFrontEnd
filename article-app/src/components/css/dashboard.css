@@ -7,6 +7,17 @@ td {
     /* border-style: solid; */
 }
 
+#dashboardWrapper {
+    text-align: center;
+    padding-left: 20%;
+}
+
+.titleCell {
+    vertical-align: bottom;
+    height: 50px;
+    text-align: center;
+}
+
 .searchBarCell {
     vertical-align: bottom;
     height: 50px;
@@ -17,6 +28,8 @@ td {
     height: 50px;
     width: 600px;
     border-radius: 30px;
+    padding: 20px;
+    font-size: 14;
 }
 
 #searchButton {
