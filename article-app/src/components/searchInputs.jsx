@@ -69,7 +69,7 @@ class SearchInputs extends React.Component {
                     </tr>
                     <tr>
                         <td className="searchButtonCell" colSpan="6">
-                            <button id="searchButton">Search</button>
+                            <button id="searchButton" onClick={this.props.onSearchSubmit}>Search</button>
                         </td>
                     </tr>
                     

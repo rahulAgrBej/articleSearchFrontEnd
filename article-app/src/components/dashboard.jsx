@@ -12,20 +12,44 @@ class Dashboard extends React.Component {
             countriesListURL: "https://article-search-api.herokuapp.com/api/countryList",
             outputListURL: "https://article-search-api.herokuapp.com/api/outputList",
             countriesList: [],
-            outputList: [],
-            selectedCountries: [],
-            selectedOptions: []
+            outputList: []
         }
+        this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
     }
+
     handleSelectCountry = (country) => {
         console.log("country handler", country)
-        
+        let newCountries = [...this.state.countriesList];
+        const countryIdx = this.state.countriesList.indexOf(country);
+
+        newCountries[countryIdx] = {...country};
+        newCountries[countryIdx].selected = !(newCountries[countryIdx].selected);
+
+        this.setState({
+            countriesList: newCountries
+        })
     }
 
     handleSelectOutput = (optionClicked) => {
         console.log("options handler", optionClicked)
+        let newOptions = [...this.state.outputList];
+        const optionIdx = this.state.outputList.indexOf(optionClicked);
 
-        
+        newOptions[optionIdx] = {...optionClicked};
+        newOptions[optionIdx].selected = !(newOptions[optionIdx].selected);
+
+        this.setState({
+            outputList: newOptions
+        })
+    }
+
+    handleSearchSubmit() {
+        console.log(
+            "testing countries submitted",
+            this.state.countriesList.filter((country) => country.selected === true),
+            "testing outputs",
+            this.state.outputList.filter((out) => out.selected === true)
+        );
     }
 
     componentDidMount() {
@@ -54,6 +78,7 @@ class Dashboard extends React.Component {
                     outputList={this.state.outputList}
                     onSelectCountry={this.handleSelectCountry}
                     onSelectOutput={this.handleSelectOutput}
+                    onSearchSubmit={this.handleSearchSubmit}
                 />
                 <br />
                 <ExampleQueries />
