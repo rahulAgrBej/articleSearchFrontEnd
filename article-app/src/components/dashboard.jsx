@@ -12,13 +12,52 @@ class Dashboard extends React.Component {
             countriesListURL: "https://article-search-api.herokuapp.com/api/countryList",
             outputListURL: "https://article-search-api.herokuapp.com/api/outputList",
             countriesList: [],
-            outputList: []
+            outputList: [],
+            startDate: "",
+            startTime: "",
+            endDate: "",
+            endTime: "",
+            searchStr: ""
         }
+        this.handleStartDateChange = this.handleStartDateChange.bind(this);
+        this.handleStartTimeChange = this.handleStartTimeChange.bind(this);
+        this.handleEndDateChange = this.handleEndDateChange.bind(this);
+        this.handleEndTimeChange = this.handleEndTimeChange.bind(this);
+        this.handleSearchStrChange = this.handleSearchStrChange.bind(this);
         this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
     }
 
+    handleStartDateChange(event) {
+        this.setState({
+            startDate: event.target.value
+        })
+    }
+
+    handleStartTimeChange(event) {
+        this.setState({
+            startTime: event.target.value
+        })
+    }
+
+    handleEndDateChange(event) {
+        this.setState({
+            endDate: event.target.value
+        })
+    }
+
+    handleEndTimeChange(event) {
+        this.setState({
+            endTime: event.target.value
+        })
+    }
+
+    handleSearchStrChange(event) {
+        this.setState({
+            searchStr: event.target.value
+        })
+    }
+
     handleSelectCountry = (country) => {
-        console.log("country handler", country)
         let newCountries = [...this.state.countriesList];
         const countryIdx = this.state.countriesList.indexOf(country);
 
@@ -31,7 +70,6 @@ class Dashboard extends React.Component {
     }
 
     handleSelectOutput = (optionClicked) => {
-        console.log("options handler", optionClicked)
         let newOptions = [...this.state.outputList];
         const optionIdx = this.state.outputList.indexOf(optionClicked);
 
@@ -48,7 +86,17 @@ class Dashboard extends React.Component {
             "testing countries submitted",
             this.state.countriesList.filter((country) => country.selected === true),
             "testing outputs",
-            this.state.outputList.filter((out) => out.selected === true)
+            this.state.outputList.filter((out) => out.selected === true),
+            "testing start date string",
+            this.state.startDate,
+            "start time",
+            this.state.startTime,
+            "end date",
+            this.state.endDate,
+            "end time",
+            this.state.endTime,
+            "search Query",
+            this.state.searchStr
         );
     }
 
@@ -78,6 +126,16 @@ class Dashboard extends React.Component {
                     outputList={this.state.outputList}
                     onSelectCountry={this.handleSelectCountry}
                     onSelectOutput={this.handleSelectOutput}
+                    startDateStr={this.state.startDate}
+                    startTimeStr={this.state.startTime}
+                    endDateStr={this.state.endDate}
+                    endTimeStr={this.state.endTime}
+                    searchTerms={this.state.searchStr}
+                    onStartDateChange={this.handleStartDateChange}
+                    onStartTimeChange={this.handleStartTimeChange}
+                    onEndDateChange={this.handleEndDateChange}
+                    onEndTimeChange={this.handleEndTimeChange}
+                    onSearchChange={this.handleSearchStrChange}
                     onSearchSubmit={this.handleSearchSubmit}
                 />
                 <br />

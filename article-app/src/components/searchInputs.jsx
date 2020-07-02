@@ -7,7 +7,6 @@ class SearchInputs extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-
         }
     }
 
@@ -24,7 +23,11 @@ class SearchInputs extends React.Component {
                     </tr>
                     <tr>
                         <td className="searchBarCell" colSpan="6">
-                            <input className="searchBar" type="text"></input>
+                            <input
+                                className="searchBar"
+                                type="text"
+                                value={this.props.searchTerms}
+                                onChange={this.props.onSearchChange}></input>
                         </td>
                     </tr>
                     <tr>
@@ -36,25 +39,44 @@ class SearchInputs extends React.Component {
                                 />
                         </td>
                         <td>
-                        <input className="dateText" type="text"></input>
+                        <input
+                            className="dateText"
+                            type="text"
+                            value={this.props.startDateStr}
+                            onChange={this.props.onStartDateChange}></input>
                         <p>Example:</p>
                         <p>Date: Jan 01 2020</p>
                         <p>Input: 01/01/2020</p>
                         </td>
                         <td>
-                        <input className="dateText" type="text"></input>
+                        <input
+                            className="dateText"
+                            type="text"
+                            value={this.props.startTimeStr}
+                            onChange={this.props.onStartTimeChange}
+                            ></input>
                         <p>Example:</p>
                         <p>Time: 1:30 PM</p>
                         <p>Input: 13:00:00</p>
                         </td>
                         <td>
-                        <input className="dateText" type="text"></input>
+                        <input
+                            className="dateText"
+                            type="text"
+                            value={this.props.endDateStr}
+                            onChange={this.props.onEndDateChange}
+                            ></input>
                         <p>Example:</p>
                         <p>Date: Jan 03 2020</p>
                         <p>Input: 01/03/2020</p>
                         </td>
                         <td>
-                        <input className="dateText" type="text"></input>
+                        <input
+                            className="dateText"
+                            type="text"
+                            value={this.props.endTimeStr}
+                            onChange={this.props.onEndTimeChange}
+                            ></input>
                         <p>Example:</p>
                         <p>Time: 5:14 AM</p>
                         <p>Input: 05:14:00</p>
