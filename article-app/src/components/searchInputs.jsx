@@ -58,7 +58,7 @@ class SearchInputs extends React.Component {
                             value={this.props.startTimeStr}
                             onChange={this.props.onStartTimeChange}
                             ></input>
-                        <p>Start Time Example:</p>
+                        <p>Example:</p>
                         <p>Time: 1:30 PM</p>
                         <p>Input: 13:00:00</p>
                         </td>
@@ -70,7 +70,7 @@ class SearchInputs extends React.Component {
                             value={this.props.endDateStr}
                             onChange={this.props.onEndDateChange}
                             ></input>
-                        <p>End Date Example:</p>
+                        <p>Example:</p>
                         <p>Date: Jan 03 2020</p>
                         <p>Input: 01/03/2020</p>
                         </td>
@@ -82,7 +82,7 @@ class SearchInputs extends React.Component {
                             value={this.props.endTimeStr}
                             onChange={this.props.onEndTimeChange}
                             ></input>
-                        <p>End Time Example:</p>
+                        <p>Example:</p>
                         <p>Time: 5:14 AM</p>
                         <p>Input: 05:14:00</p>
                         </td>
