@@ -1,7 +1,6 @@
 import React from 'react'
 import SearchInputs from './searchInputs'
 import  ExampleQueries from './exampleQueries'
-import './css/textBarDate.css'
 import './css/dashboard.css'
 
 class Dashboard extends React.Component {
