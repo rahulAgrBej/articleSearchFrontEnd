@@ -10,6 +10,7 @@ class Dashboard extends React.Component {
         this.state = {
             countriesListURL: "https://article-search-api.herokuapp.com/api/countryList",
             outputListURL: "https://article-search-api.herokuapp.com/api/outputList",
+            searchSubmitURL: "https://article-search-api.herokuapp.com/api/search",
             countriesList: [],
             outputList: [],
             startDate: "",
@@ -81,21 +82,32 @@ class Dashboard extends React.Component {
     }
 
     handleSearchSubmit() {
-        console.log(
-            "testing countries submitted",
-            this.state.countriesList.filter((country) => country.selected === true),
-            "testing outputs",
-            this.state.outputList.filter((out) => out.selected === true),
-            "testing start date string",
-            this.state.startDate,
-            "start time",
-            this.state.startTime,
-            "end date",
-            this.state.endDate,
-            "end time",
-            this.state.endTime,
-            "search Query",
-            this.state.searchStr
+
+        let reqBody = {
+            "countries": this.state.countriesList.filter((country) => country.selected === true),
+            "outputs": this.state.outputList.filter((out) => out.selected === true),
+            "startTime": this.state.startTime,
+            "startDate": this.state.startDate,
+            "endTime": this.state.endTime,
+            "endDate": this.state.endDate,
+            "searchStr": this.state.searchStr
+        };
+
+        console.log(reqBody);
+
+        // form json object to send over to API
+        let reqOptions = {
+            method: "POST",
+            headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+            body: JSON.stringify(reqBody)
+        };
+
+        fetch(this.state.searchSubmitURL, reqOptions)
+        .then((resp) => resp.json()
+        )
+        .then((data) => {
+            console.log(data);
+        }
         );
     }
 
