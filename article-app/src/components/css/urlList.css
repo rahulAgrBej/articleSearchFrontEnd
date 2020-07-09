@@ -1,0 +1,15 @@
+.urlCell {
+    width: 900px;
+    text-align: left;
+    border-style: solid;
+    padding: 10px;
+}
+
+#titleURLCell {
+    height: 50px;
+}
+
+#urlListContents {
+    overflow: auto;
+    max-height: 100px;
+}

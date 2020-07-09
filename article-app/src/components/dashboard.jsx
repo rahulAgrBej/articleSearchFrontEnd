@@ -1,6 +1,7 @@
 import React from 'react'
 import SearchInputs from './searchInputs'
 import  ExampleQueries from './exampleQueries'
+import UrlList from './urlList'
 import './css/dashboard.css'
 
 class Dashboard extends React.Component {
@@ -17,7 +18,8 @@ class Dashboard extends React.Component {
             startTime: "",
             endDate: "",
             endTime: "",
-            searchStr: ""
+            searchStr: "",
+            urls: []
         }
         this.handleStartDateChange = this.handleStartDateChange.bind(this);
         this.handleStartTimeChange = this.handleStartTimeChange.bind(this);
@@ -107,6 +109,9 @@ class Dashboard extends React.Component {
         )
         .then((data) => {
             console.log(data);
+            this.setState({
+                urls: data['urlList']
+            })
         }
         );
     }
@@ -151,6 +156,10 @@ class Dashboard extends React.Component {
                 />
                 <br />
                 <ExampleQueries />
+                <br />
+                <UrlList
+                 urls={this.state.urls}
+                />
                 </div>
                 
             </div>
