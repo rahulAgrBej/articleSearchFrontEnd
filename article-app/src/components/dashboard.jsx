@@ -160,6 +160,7 @@ class Dashboard extends React.Component {
                 <UrlList
                  urls={this.state.urls}
                 />
+                <br />
                 </div>
                 
             </div>
