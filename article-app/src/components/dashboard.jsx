@@ -99,7 +99,7 @@ class Dashboard extends React.Component {
 
         // form json object to send over to API
         let reqOptions = {
-            method: "POST",
+            method: "GET",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(reqBody)
         };
