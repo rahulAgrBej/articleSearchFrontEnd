@@ -25,15 +25,16 @@ class UrlList extends React.Component {
                     <tr>
                         <td className="urlCell">
                             <div id="urlListContents">
-                                
+                                <ul>
                                 {
                                     this.props.urls.map(
                                         (currURL) =>
-                                        <p key="testingURLS">
-                                            {currURL} <br key={currURL} />
-                                        </p>
+                                        <li key={currURL}>
+                                            {currURL}
+                                        </li>
                                     )
                                 }
+                                </ul>
                             </div>
                         </td>
                     </tr>
