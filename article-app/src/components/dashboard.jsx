@@ -11,7 +11,7 @@ class Dashboard extends React.Component {
         this.state = {
             countriesListURL: "https://article-search-api.herokuapp.com/api/countryList",
             outputListURL: "https://article-search-api.herokuapp.com/api/outputList",
-            searchSubmitURL: "https://article-search-api.herokuapp.com/api/search",
+            searchSubmitURL: "https://article-search-api.herokuapp.com/api/searchTrends",
             countriesList: [],
             outputList: [],
             startDate: "",
@@ -83,17 +83,30 @@ class Dashboard extends React.Component {
         })
     }
 
+    buildEncodedURL(baseURL, params) {
+
+        let encodedURL = baseURL + "?"
+
+        for (let i = 0; i < params.length; ++i) {
+            encodedURL = encodedURL + params[i][0] + "=" + encodeURIComponent(JSON.stringify(params[i][1]))
+            if (i < params.length - 1) {
+                encodedURL = encodedURL + "&"
+            }
+        }
+        return encodedURL
+    }
+
     handleSearchSubmit() {
 
-        let reqBody = {
-            "countries": this.state.countriesList.filter((country) => country.selected === true),
-            "outputs": this.state.outputList.filter((out) => out.selected === true),
-            "startTime": this.state.startTime,
-            "startDate": this.state.startDate,
-            "endTime": this.state.endTime,
-            "endDate": this.state.endDate,
-            "searchStr": this.state.searchStr
-        };
+        let reqBody = [
+            ["countries", this.state.countriesList.filter((country) => country.selected === true)],
+            ["outputs", this.state.outputList.filter((out) => out.selected === true)],
+            ["startTime", this.state.startTime],
+            ["startDate", this.state.startDate],
+            ["endTime", this.state.endTime],
+            ["endDate", this.state.endDate],
+            ["q", this.state.searchStr]
+        ];
 
         console.log(reqBody);
 
@@ -104,14 +117,18 @@ class Dashboard extends React.Component {
             body: JSON.stringify(reqBody)
         };
 
-        fetch(this.state.searchSubmitURL, reqOptions)
+        let searchURL = this.buildEncodedURL(this.state.searchSubmitURL, reqBody)
+
+        fetch(searchURL)
         .then((resp) => resp.json()
         )
         .then((data) => {
             console.log(data);
-            this.setState({
-                urls: data['urlList']
-            })
+
+            // iterate over results country by country
+            for (let i = 0; i < data['results'].length; ++i) {
+                console.log(data['results'][i]['query_details']['title']);
+            }
         }
         );
     }
