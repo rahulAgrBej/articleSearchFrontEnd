@@ -2,6 +2,7 @@ import React from 'react'
 import SearchInputs from './searchInputs'
 import  ExampleQueries from './exampleQueries'
 import UrlList from './urlList'
+import FrequencyChart from './frequencyChart'
 import './css/dashboard.css'
 
 class Dashboard extends React.Component {
@@ -19,7 +20,8 @@ class Dashboard extends React.Component {
             endDate: "",
             endTime: "",
             searchStr: "",
-            urls: []
+            urls: [],
+            queryResults: []
         }
         this.handleStartDateChange = this.handleStartDateChange.bind(this);
         this.handleStartTimeChange = this.handleStartTimeChange.bind(this);
@@ -96,6 +98,39 @@ class Dashboard extends React.Component {
         return encodedURL
     }
 
+    formatData(data) {
+        console.log("in format data")
+        console.log(data[0])
+        console.log(data.length)
+        let formattedData = []
+
+        // for each country in data set
+        for (let i = 0; i < data.length; ++i) {
+
+            let countryData = {}
+            countryData.type = "line"
+            countryData.axisYType = "secondary"
+            countryData.showInLegend = true
+            countryData.name = data[i]["query_details"]["title"].slice(-2)
+            let countryPoints = []
+            for (let j = 0; j < data[i]["timeline"][0]["data"].length; ++j) {
+
+                let year = parseInt(data[i]["timeline"][0]["data"][j]["date"].slice(0, 4))
+                let month = parseInt(data[i]["timeline"][0]["data"][j]["date"].slice(4, 6))
+                let day = parseInt(data[i]["timeline"][0]["data"][j]["date"].slice(6, 8))
+                let freq = data[i]["timeline"][0]["data"][j]["value"]
+
+                countryPoints.push(
+                    {x: new Date(year, month, day), y: freq}
+                )
+            }
+            countryData.dataPoints = countryPoints
+            formattedData.push(countryData)
+        }
+
+        return formattedData;
+    }
+
     handleSearchSubmit() {
 
         let reqBody = [
@@ -125,10 +160,7 @@ class Dashboard extends React.Component {
         .then((data) => {
             console.log(data);
 
-            // iterate over results country by country
-            for (let i = 0; i < data['results'].length; ++i) {
-                console.log(data['results'][i]['query_details']['title']);
-            }
+            console.log(this.formatData(data['results']));
         }
         );
     }
@@ -174,8 +206,7 @@ class Dashboard extends React.Component {
                 <br />
                 <ExampleQueries />
                 <br />
-                <UrlList
-                 urls={this.state.urls}
+                <FrequencyChart
                 />
                 <br />
                 </div>
