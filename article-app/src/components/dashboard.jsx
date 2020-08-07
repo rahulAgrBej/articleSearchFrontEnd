@@ -3,6 +3,7 @@ import SearchInputs from './searchInputs'
 import  ExampleQueries from './exampleQueries'
 import UrlList from './urlList'
 import FrequencyChart from './frequencyChart'
+import CanvasJSReact from './canvasjs.react'
 import './css/dashboard.css'
 
 class Dashboard extends React.Component {
@@ -21,8 +22,10 @@ class Dashboard extends React.Component {
             endTime: "",
             searchStr: "",
             urls: [],
-            queryResults: []
+            queryResults: {}
         }
+
+        this.chartRef = React.createRef();
         this.handleStartDateChange = this.handleStartDateChange.bind(this);
         this.handleStartTimeChange = this.handleStartTimeChange.bind(this);
         this.handleEndDateChange = this.handleEndDateChange.bind(this);
@@ -99,18 +102,13 @@ class Dashboard extends React.Component {
     }
 
     formatData(data) {
-        console.log("in format data")
-        console.log(data[0])
-        console.log(data.length)
         let formattedData = []
 
         // for each country in data set
         for (let i = 0; i < data.length; ++i) {
 
             let countryData = {}
-            countryData.type = "line"
-            countryData.axisYType = "secondary"
-            countryData.showInLegend = true
+            countryData.type = "spline"
             countryData.name = data[i]["query_details"]["title"].slice(-2)
             let countryPoints = []
             for (let j = 0; j < data[i]["timeline"][0]["data"].length; ++j) {
@@ -143,7 +141,6 @@ class Dashboard extends React.Component {
             ["q", this.state.searchStr]
         ];
 
-        console.log(reqBody);
 
         // form json object to send over to API
         let reqOptions = {
@@ -158,11 +155,29 @@ class Dashboard extends React.Component {
         .then((resp) => resp.json()
         )
         .then((data) => {
-            console.log(data);
+            let processedResults = this.formatData(data['results']);
+            let processedChartOptions = {};
+            processedChartOptions.animationEnabled = true;
+            processedChartOptions.title = {};
+            processedChartOptions.title.text = this.state.searchStr;
+            processedChartOptions.axisX = {}
+            processedChartOptions.axisX.title = "Timeline"
+            processedChartOptions.axisX.valueFormatString = "MMM"
+            processedChartOptions.axisY = {}
+            processedChartOptions.axisY.title = "Number of Articles"
+            processedChartOptions.data = this.formatData(data['results']);
 
-            console.log(this.formatData(data['results']));
+            this.setState({
+                queryResults: processedChartOptions
+            });
+
+            this.chartRef.options = this.state.queryResults;
+            this.chartRef.render();
+
         }
         );
+
+        
     }
 
     componentDidMount() {
@@ -206,8 +221,7 @@ class Dashboard extends React.Component {
                 <br />
                 <ExampleQueries />
                 <br />
-                <FrequencyChart
-                />
+                <CanvasJSReact.CanvasJSChart options={this.state.queryResults} onRef={ref => this.chartRef = ref}/>
                 <br />
                 </div>
                 
