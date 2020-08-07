@@ -110,6 +110,8 @@ class Dashboard extends React.Component {
             let countryData = {}
             countryData.type = "spline"
             countryData.name = data[i]["query_details"]["title"].slice(-2)
+            countryData.showInLegend = true;
+            countryData.legendText = data[i]["query_details"]["title"].slice(-2)
             let countryPoints = []
             for (let j = 0; j < data[i]["timeline"][0]["data"].length; ++j) {
 
@@ -166,6 +168,8 @@ class Dashboard extends React.Component {
             processedChartOptions.axisY = {}
             processedChartOptions.axisY.title = "Number of Articles"
             processedChartOptions.data = this.formatData(data['results']);
+            processedChartOptions.width = 900;
+            processedChartOptions.height = 500;
 
             this.setState({
                 queryResults: processedChartOptions
