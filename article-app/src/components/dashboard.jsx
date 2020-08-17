@@ -134,6 +134,15 @@ class Dashboard extends React.Component {
     handleSearchSubmit() {
 
         this.setState({
+            queryResults: {}
+        })
+
+        this.chartRef.options = {}
+        this.chartRef.options.title = {}
+        this.chartRef.options.title.text = ""
+        this.chartRef.render()
+
+        this.setState({
             showLoadingStatus: "loadingStatusShow"
         })
 

@@ -5,6 +5,7 @@
 
 .loadingStatusShow {
     display: block;
+    text-align: center;
 }
 
 .loadingStatusHide {
