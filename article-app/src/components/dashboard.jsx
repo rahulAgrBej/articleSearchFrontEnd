@@ -1,9 +1,8 @@
 import React from 'react'
 import SearchInputs from './searchInputs'
 import  ExampleQueries from './exampleQueries'
-import UrlList from './urlList'
-import FrequencyChart from './frequencyChart'
 import CanvasJSReact from './canvasjs.react'
+import LoadingLogo from "./mediaFiles/loading.gif"
 import './css/dashboard.css'
 
 class Dashboard extends React.Component {
@@ -22,7 +21,8 @@ class Dashboard extends React.Component {
             endTime: "",
             searchStr: "",
             urls: [],
-            queryResults: {}
+            queryResults: {},
+            showLoadingStatus: "loadingStatusHide"
         }
 
         this.chartRef = React.createRef();
@@ -133,6 +133,10 @@ class Dashboard extends React.Component {
 
     handleSearchSubmit() {
 
+        this.setState({
+            showLoadingStatus: "loadingStatusShow"
+        })
+
         let reqBody = [
             ["countries", this.state.countriesList.filter((country) => country.selected === true)],
             ["outputs", this.state.outputList.filter((out) => out.selected === true)],
@@ -144,20 +148,13 @@ class Dashboard extends React.Component {
         ];
 
 
-        // form json object to send over to API
-        let reqOptions = {
-            method: "GET",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(reqBody)
-        };
-
         let searchURL = this.buildEncodedURL(this.state.searchSubmitURL, reqBody)
 
         fetch(searchURL)
         .then((resp) => resp.json()
         )
         .then((data) => {
-            let processedResults = this.formatData(data['results']);
+            //let processedResults = this.formatData(data['results']);
             let processedChartOptions = {};
             processedChartOptions.animationEnabled = true;
             processedChartOptions.title = {};
@@ -172,12 +169,12 @@ class Dashboard extends React.Component {
             processedChartOptions.height = 500;
 
             this.setState({
-                queryResults: processedChartOptions
+                queryResults: processedChartOptions,
+                showLoadingStatus: "loadingStatusHide"
             });
 
             this.chartRef.options = this.state.queryResults;
             this.chartRef.render();
-
         }
         );
 
@@ -225,6 +222,7 @@ class Dashboard extends React.Component {
                 <br />
                 <ExampleQueries />
                 <br />
+                <img src={LoadingLogo} className={this.state.showLoadingStatus} alt="loading logo gif"></img>
                 <CanvasJSReact.CanvasJSChart options={this.state.queryResults} onRef={ref => this.chartRef = ref}/>
                 <br />
                 </div>
