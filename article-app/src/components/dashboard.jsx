@@ -115,17 +115,22 @@ class Dashboard extends React.Component {
             countryData.showInLegend = true;
             countryData.legendText = data[i]["query_details"]["title"].slice(-2)
             let countryPoints = []
-            for (let j = 0; j < data[i]["timeline"][0]["data"].length; ++j) {
+            if (data[i]["timeline"].length > 0) {
+                for (let j = 0; j < data[i]["timeline"][0]["data"].length; ++j) {
 
-                let year = parseInt(data[i]["timeline"][0]["data"][j]["date"].slice(0, 4))
-                let month = parseInt(data[i]["timeline"][0]["data"][j]["date"].slice(4, 6))
-                let day = parseInt(data[i]["timeline"][0]["data"][j]["date"].slice(6, 8))
-                let freq = data[i]["timeline"][0]["data"][j]["value"]
-
-                countryPoints.push(
-                    {x: new Date(year, month - 1, day), y: freq}
-                )
+                    let year = parseInt(data[i]["timeline"][0]["data"][j]["date"].slice(0, 4))
+                    let month = parseInt(data[i]["timeline"][0]["data"][j]["date"].slice(4, 6))
+                    let day = parseInt(data[i]["timeline"][0]["data"][j]["date"].slice(6, 8))
+                    let hour = parseInt(data[i]["timeline"][0]["data"][j]["date"].slice(9, 11))
+                    let minute = parseInt(data[i]["timeline"][0]["data"][j]["date"].slice(11, 13))
+                    let freq = data[i]["timeline"][0]["data"][j]["value"]
+    
+                    countryPoints.push(
+                        {x: new Date(year, month - 1, day, hour, minute), y: freq}
+                    )
+                }
             }
+            
             countryData.dataPoints = countryPoints
             formattedData.push(countryData)
         }
@@ -170,6 +175,7 @@ class Dashboard extends React.Component {
         )
         .then((data) => {
             //let processedResults = this.formatData(data['results']);
+            console.log(data);
             let processedChartOptions = {};
             processedChartOptions.animationEnabled = true;
             processedChartOptions.title = {};
