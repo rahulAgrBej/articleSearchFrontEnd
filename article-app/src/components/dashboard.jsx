@@ -274,7 +274,7 @@ class Dashboard extends React.Component {
                 <div ref={this.loadingRef}>
                 <img src={LoadingLogo} className={this.state.showLoadingStatus} alt="loading logo gif"></img>
                 </div>
-                <p>{this.state.resultMsg}</p>
+                <h3>{this.state.resultMsg}</h3>
                 <div ref={this.resultRef}>
                 <CanvasJSReact.CanvasJSChart options={this.state.queryResults} onRef={ref => this.chartRef = ref}/>
                 </div>
