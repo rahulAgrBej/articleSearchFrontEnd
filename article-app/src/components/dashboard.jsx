@@ -251,32 +251,48 @@ class Dashboard extends React.Component {
         return (
             <div>
                 <div id="dashboardWrapper">
-                <SearchInputs
-                    countriesList={this.state.countriesList}
-                    outputList={this.state.outputList}
-                    onSelectCountry={this.handleSelectCountry}
-                    onSelectOutput={this.handleSelectOutput}
-                    startDateStr={this.state.startDate}
-                    startTimeStr={this.state.startTime}
-                    endDateStr={this.state.endDate}
-                    endTimeStr={this.state.endTime}
-                    searchTerms={this.state.searchStr}
-                    onStartDateChange={this.handleStartDateChange}
-                    onStartTimeChange={this.handleStartTimeChange}
-                    onEndDateChange={this.handleEndDateChange}
-                    onEndTimeChange={this.handleEndTimeChange}
-                    onSearchChange={this.handleSearchStrChange}
-                    onSearchSubmit={this.handleSearchSubmit}
-                />
-                <ExampleQueries />
-                <br />
-                <div ref={this.loadingRef}>
-                <img src={LoadingLogo} className={this.state.showLoadingStatus} alt="loading logo gif"></img>
-                </div>
-                <h3>{this.state.resultMsg}</h3>
-                <div ref={this.resultRef}>
-                <CanvasJSReact.CanvasJSChart options={this.state.queryResults} onRef={ref => this.chartRef = ref}/>
-                </div>
+                    <table>
+                        <thead></thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                <SearchInputs
+                                    countriesList={this.state.countriesList}
+                                    outputList={this.state.outputList}
+                                    onSelectCountry={this.handleSelectCountry}
+                                    onSelectOutput={this.handleSelectOutput}
+                                    startDateStr={this.state.startDate}
+                                    startTimeStr={this.state.startTime}
+                                    endDateStr={this.state.endDate}
+                                    endTimeStr={this.state.endTime}
+                                    searchTerms={this.state.searchStr}
+                                    onStartDateChange={this.handleStartDateChange}
+                                    onStartTimeChange={this.handleStartTimeChange}
+                                    onEndDateChange={this.handleEndDateChange}
+                                    onEndTimeChange={this.handleEndTimeChange}
+                                    onSearchChange={this.handleSearchStrChange}
+                                    onSearchSubmit={this.handleSearchSubmit}
+                                />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                <ExampleQueries />
+                                <div ref={this.loadingRef}>
+                                <img src={LoadingLogo} className={this.state.showLoadingStatus} alt="loading logo gif"></img>
+                                <h3>{this.state.resultMsg}</h3>
+                                </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                <div ref={this.resultRef}>
+                                <CanvasJSReact.CanvasJSChart options={this.state.queryResults} onRef={ref => this.chartRef = ref}/>
+                                </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 <br />
                 <br />
                 </div>

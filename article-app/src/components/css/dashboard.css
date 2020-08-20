@@ -1,12 +1,12 @@
 #dashboardWrapper {
     text-align: center;
-    padding-left: 20%;
+    padding-left: 20%
 }
 
 .loadingStatusShow {
     display: block;
     text-align: center;
-    margin-left: 350px;
+    margin-left: 325px;
 }
 
 .loadingStatusHide {

@@ -17,14 +17,14 @@ class SearchInputs extends React.Component {
                     <thead></thead>
                     <tbody>
                     <tr>
-                        <td className="titleCell" colSpan="6">
+                        <td id="titleCell" colSpan="6">
                             <h1>articleSearch</h1>
                         </td>
                     </tr>
                     <tr>
-                        <td className="searchBarCell" colSpan="6">
+                        <td id="searchBarCell" colSpan="6">
                             <input
-                                className="searchBar"
+                                id="searchBar"
                                 type="text"
                                 placeholder="Search..."
                                 value={this.props.searchTerms}
@@ -32,14 +32,14 @@ class SearchInputs extends React.Component {
                         </td>
                     </tr>
                     <tr>
-                        <td>
+                        <td className="searchInputCell">
                         <CheckedDropDown
                                 name="Countries"
                                 optionsList={this.props.countriesList}
                                 onSelect={this.props.onSelectCountry}
                                 />
                         </td>
-                        <td>
+                        <td className="searchInputCell">
                         <input
                             className="dateText"
                             type="text"
@@ -50,7 +50,7 @@ class SearchInputs extends React.Component {
                         <p>Date: Jan 01 2020</p>
                         <p>Input: 01/01/2020</p>
                         </td>
-                        <td>
+                        <td className="searchInputCell">
                         <input
                             className="dateText"
                             type="text"
@@ -62,7 +62,7 @@ class SearchInputs extends React.Component {
                         <p>Time: 1:30 PM</p>
                         <p>Input: 13:00:00</p>
                         </td>
-                        <td>
+                        <td className="searchInputCell">
                         <input
                             className="dateText"
                             type="text"
@@ -74,7 +74,7 @@ class SearchInputs extends React.Component {
                         <p>Date: Jan 03 2020</p>
                         <p>Input: 01/03/2020</p>
                         </td>
-                        <td>
+                        <td className="searchInputCell">
                         <input
                             className="dateText"
                             type="text"
@@ -86,7 +86,7 @@ class SearchInputs extends React.Component {
                         <p>Time: 5:14 AM</p>
                         <p>Input: 05:14:00</p>
                         </td>
-                        <td>
+                        <td className="searchInputCell">
                         <CheckedDropDown
                                 name="Output Types"
                                 optionsList={this.props.outputList}
@@ -95,7 +95,7 @@ class SearchInputs extends React.Component {
                         </td>
                     </tr>
                     <tr>
-                        <td className="searchButtonCell" colSpan="6">
+                        <td id="searchButtonCell" colSpan="6">
                             <button id="searchButton" onClick={this.props.onSearchSubmit}>Search</button>
                         </td>
                     </tr>

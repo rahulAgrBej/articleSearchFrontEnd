@@ -1,4 +1,4 @@
-td {
+.searchInputCell {
     height: 180px;
     width: 150px;
     vertical-align: top;
@@ -7,19 +7,19 @@ td {
     /*border-style: solid;*/
 }
 
-.titleCell {
+#titleCell {
     vertical-align: bottom;
     height: 50px;
     text-align: center;
 }
 
-.searchBarCell {
+#searchBarCell {
     vertical-align: bottom;
     height: 50px;
     text-align: center;
 }
 
-.searchBar {
+#searchBar {
     height: 50px;
     width: 600px;
     border-radius: 30px;
@@ -38,7 +38,7 @@ td {
     border: 0;
 }
 
-.searchButtonCell {
+#searchButtonCell {
     height: 50px;
 }
 
