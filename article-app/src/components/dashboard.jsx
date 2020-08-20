@@ -26,6 +26,8 @@ class Dashboard extends React.Component {
         }
 
         this.chartRef = React.createRef();
+        this.resultRef = React.createRef();
+        this.loadingRef = React.createRef();
         this.handleStartDateChange = this.handleStartDateChange.bind(this);
         this.handleStartTimeChange = this.handleStartTimeChange.bind(this);
         this.handleEndDateChange = this.handleEndDateChange.bind(this);
@@ -133,6 +135,10 @@ class Dashboard extends React.Component {
 
     handleSearchSubmit() {
 
+        this.loadingRef.current.scrollIntoView({ 
+            behavior: "smooth"
+         })
+
         this.setState({
             queryResults: {}
         })
@@ -186,6 +192,10 @@ class Dashboard extends React.Component {
 
             this.chartRef.options = this.state.queryResults;
             this.chartRef.render();
+
+            this.resultRef.current.scrollIntoView({ 
+                behavior: "smooth"
+             })
         }
         );
 
@@ -233,8 +243,12 @@ class Dashboard extends React.Component {
                 <br />
                 <ExampleQueries />
                 <br />
+                <div ref={this.loadingRef}>
                 <img src={LoadingLogo} className={this.state.showLoadingStatus} alt="loading logo gif"></img>
+                </div>
+                <div ref={this.resultRef}>
                 <CanvasJSReact.CanvasJSChart options={this.state.queryResults} onRef={ref => this.chartRef = ref}/>
+                </div>
                 <br />
                 </div>
                 
