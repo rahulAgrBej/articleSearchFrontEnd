@@ -121,7 +121,7 @@ class Dashboard extends React.Component {
                 let freq = data[i]["timeline"][0]["data"][j]["value"]
 
                 countryPoints.push(
-                    {x: new Date(year, month, day), y: freq}
+                    {x: new Date(year, month - 1, day), y: freq}
                 )
             }
             countryData.dataPoints = countryPoints
