@@ -168,9 +168,11 @@ class Dashboard extends React.Component {
             processedChartOptions.animationEnabled = true;
             processedChartOptions.title = {};
             processedChartOptions.title.text = this.state.searchStr;
-            processedChartOptions.axisX = {}
-            processedChartOptions.axisX.title = "Timeline"
-            processedChartOptions.axisX.valueFormatString = "MMM"
+            processedChartOptions.title.fontFamily = "Arial";
+            processedChartOptions.axisX = {};
+            processedChartOptions.axisX.title = "Timeline";
+
+            //processedChartOptions.axisX.valueFormatString = "MMM"
             processedChartOptions.axisY = {}
             processedChartOptions.axisY.title = "Number of Articles"
             processedChartOptions.data = this.formatData(data['results']);
