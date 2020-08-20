@@ -7,7 +7,7 @@ class ExampleQueries extends React.Component {
         super(props);
         this.state = {
             showExampleText: "Show Example Queries",
-            cellDisplay: "exampleCell"
+            cellDisplay: "hideCell"
         }
 
         this.handleExampleClick = this.handleExampleClick.bind(this);
@@ -18,13 +18,13 @@ class ExampleQueries extends React.Component {
         if (this.state.showExampleText === "Show Example Queries") {
             this.setState({
                 showExampleText: "Hide Example Queries",
-                cellDisplay: "hideCell"
+                cellDisplay: "exampleCell"
             })
         }
         else {
             this.setState({
                 showExampleText: "Show Example Queries",
-                cellDisplay: "exampleCell"
+                cellDisplay: "hideCell"
             })
         }
     }
