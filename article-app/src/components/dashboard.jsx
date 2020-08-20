@@ -22,7 +22,8 @@ class Dashboard extends React.Component {
             searchStr: "",
             urls: [],
             queryResults: {},
-            showLoadingStatus: "loadingStatusHide"
+            showLoadingStatus: "loadingStatusHide",
+            resultMsg: ""
         }
 
         this.chartRef = React.createRef();
@@ -140,10 +141,17 @@ class Dashboard extends React.Component {
 
     handleSearchSubmit() {
 
+        // reset any error messages
+        this.setState({
+            resultMsg: ""
+        })
+
+        // scroll to the loading gif
         this.loadingRef.current.scrollIntoView({ 
             behavior: "smooth"
          })
 
+        // resetting chart data
         this.setState({
             queryResults: {}
         })
@@ -153,6 +161,7 @@ class Dashboard extends React.Component {
         this.chartRef.options.title.text = ""
         this.chartRef.render()
 
+        // show loading gif
         this.setState({
             showLoadingStatus: "loadingStatusShow"
         })
@@ -171,7 +180,20 @@ class Dashboard extends React.Component {
         let searchURL = this.buildEncodedURL(this.state.searchSubmitURL, reqBody)
 
         fetch(searchURL)
-        .then((resp) => resp.json()
+        .then((resp) => {
+
+            // if request fails then print error message
+            if (!resp.ok) {
+                console.log(resp);
+                this.setState({
+                    resultMsg: "An internal error occurred, please try a different search query.",
+                    showLoadingStatus: "loadingStatusHide"
+                });
+
+                throw Error(resp.statusText);
+            }
+            return resp.json()
+        }
         )
         .then((data) => {
             //let processedResults = this.formatData(data['results']);
@@ -203,7 +225,7 @@ class Dashboard extends React.Component {
                 behavior: "smooth"
              })
         }
-        );
+        ).catch(error => console.log(error));
 
         
     }
@@ -252,6 +274,7 @@ class Dashboard extends React.Component {
                 <div ref={this.loadingRef}>
                 <img src={LoadingLogo} className={this.state.showLoadingStatus} alt="loading logo gif"></img>
                 </div>
+                <p>{this.state.resultMsg}</p>
                 <div ref={this.resultRef}>
                 <CanvasJSReact.CanvasJSChart options={this.state.queryResults} onRef={ref => this.chartRef = ref}/>
                 </div>
