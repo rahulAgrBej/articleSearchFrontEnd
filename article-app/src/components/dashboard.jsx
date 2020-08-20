@@ -268,7 +268,6 @@ class Dashboard extends React.Component {
                     onSearchChange={this.handleSearchStrChange}
                     onSearchSubmit={this.handleSearchSubmit}
                 />
-                <br />
                 <ExampleQueries />
                 <br />
                 <div ref={this.loadingRef}>
@@ -278,6 +277,7 @@ class Dashboard extends React.Component {
                 <div ref={this.resultRef}>
                 <CanvasJSReact.CanvasJSChart options={this.state.queryResults} onRef={ref => this.chartRef = ref}/>
                 </div>
+                <br />
                 <br />
                 </div>
                 

@@ -5,7 +5,28 @@ class ExampleQueries extends React.Component {
     
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            showExampleText: "Show Example Queries",
+            cellDisplay: "exampleCell"
+        }
+
+        this.handleExampleClick = this.handleExampleClick.bind(this);
+    }
+
+    handleExampleClick() {
+
+        if (this.state.showExampleText === "Show Example Queries") {
+            this.setState({
+                showExampleText: "Hide Example Queries",
+                cellDisplay: "hideCell"
+            })
+        }
+        else {
+            this.setState({
+                showExampleText: "Show Example Queries",
+                cellDisplay: "exampleCell"
+            })
+        }
     }
 
     render() {
@@ -15,12 +36,17 @@ class ExampleQueries extends React.Component {
                     <thead></thead>
                     <tbody>
                         <tr>
-                            <td id="titleExampleCell" className="exampleCell">
+                            <td id="exampleBtnCell">
+                                <button id="exampleBtn" onClick={this.handleExampleClick}>{this.state.showExampleText}</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="titleExampleCell" className={this.state.cellDisplay}>
                                 <h1>Example Queries</h1>
                             </td>
                         </tr>
                         <tr>
-                            <td className="exampleCell">
+                            <td className={this.state.cellDisplay}>
                                 <p>Below are some sample search queries that could be run:</p>
                                 <p>If you wanted to search for "seafood" AND "trade"</p>
                                 <ul>
